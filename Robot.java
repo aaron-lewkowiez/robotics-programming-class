@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -20,7 +19,7 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import java.util.List;
 
 public class Robot extends TimedRobot {
-  private final GenericHID m_controller = new Joystick(0);
+  private final XboxController m_controller = new XboxController(0);
 
   // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0
   // to 1.
@@ -61,16 +60,25 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     double elapsed = m_timer.get();
+    double speed;
+    double spin;
+
+    if( elapsed < 0.50 ){
+      m_drive.drive(0, 4);
+    }
+    else if ( elapsed < 1.50 ){
+      m_drive.drive(5, 0);
+    }
+    else if ( elapsed < 2){
+      m_drive.drive(2, 2);
+    }
+    else {
+      m_drive.drive(0,0);
+    }
+
     Trajectory.State reference = m_trajectory.sample(elapsed);
     ChassisSpeeds speeds = m_ramsete.calculate(m_drive.getPose(), reference);
     m_drive.drive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
-  }
-
-  public double removeNoise(double in) {
-    if(Math.abs(in)<0.1) {
-      return 0.00;
-    }
-    else return in;
   }
 
   @Override
@@ -79,13 +87,14 @@ public class Robot extends TimedRobot {
     // Get the x speed. We are inverting this because Xbox controllers return
     // negative values when we push forward.
     double xSpeed =
-        -m_speedLimiter.calculate(removeNoise(m_controller.getY(GenericHID.Hand.kLeft))) * Drivetrain.kMaxSpeed;
+        -m_speedLimiter.calculate(m_controller.getY(GenericHID.Hand.kLeft)) * Drivetrain.kMaxSpeed;
+
     // Get the rate of angular rotation. We are inverting this because we want a
     // positive value when we pull to the left (remember, CCW is positive in
     // mathematics). Xbox controllers return positive values when you pull to
     // the right by default.
     double rot =
-        -m_rotLimiter.calculate(removeNoise(m_controller.getRawAxis(2)))
+        -m_rotLimiter.calculate(m_controller.getX(GenericHID.Hand.kRight))
             * Drivetrain.kMaxAngularSpeed;
     m_drive.drive(xSpeed, rot);
   }
