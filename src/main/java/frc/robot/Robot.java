@@ -69,15 +69,15 @@ public class Robot extends TimedRobot {
       m_drive.drive(5,0);
     }
     else if ( gyro.getAngle() > -90 ){
-      m_drive.drive(0,1);
+        m_drive.drive(0,1); 
     }
-    if (m_drive.getEncoders()[0].getDistance()< 5) {
-      m_drive.drive(5,0);
+    else if (gyro.getAngle() == -90 && m_drive.getEncoders()[0].getDistance()< 12) {
+          m_drive.drive(5,0);
     }
     else if ( gyro.getAngle() > 90 ){
       m_drive.drive(0,1);
     }
-    if (m_drive.getEncoders()[0].getDistance()< 4) {
+    else if (m_drive.getEncoders()[0].getDistance()< 4) {
       m_drive.drive(5,0);
     }
     else if ( gyro.getAngle() > 90 ){
