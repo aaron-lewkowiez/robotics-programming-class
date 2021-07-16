@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
@@ -62,13 +62,99 @@ public class Robot extends TimedRobot {
     double speed;
     double spin;
 
-    if( elapsed < 1){
-      m_drive.drive(20, 0);
-    }
+  // AnalogGyro gyro = m_drive.getGyro();
+  // System.out.println(gyro.getAngle();
+  
+  if (m_drive.getencoders()[0].getDistance() < 7) {
+    m_drive.drive(12,0);
+  }  
+  
+  else if(m_drive.getGyro().getAngle() > -90 && m_drive.getencoders()[0].getDistance() < 14 ) {
+    m_drive.drive(0,.5);
+  }
+  
+  else if (m_drive.getencoders()[0].getDistance() < 14) {
+    
+    m_drive.drive(12,0);
+  }
+  else if(m_drive.getGyro().getAngle() <-10 && m_drive.getencoders()[0].getDistance() < 30) {
+    m_drive.drive(0,-.5);
+  }
+    else if (m_drive.getencoders()[0].getDistance() < 23.5 ) {
+      m_drive.drive(12,0);
+  }
+  else if(m_drive.getGyro().getAngle() <90 && m_drive.getencoders()[0].getDistance() < 27 ) {
+    m_drive.drive(0,-.5);
+  }
+  else if (m_drive.getencoders()[0].getDistance() < 28){
+     m_drive.drive(12,0);
+  }
+ else if(m_drive.getGyro().getAngle() <180 && m_drive.getencoders()[0].getDistance() < 32) {
+  m_drive.drive(0,-.5);
+ }
+ else if (m_drive.getencoders()[0].getDistance() < 33){
+  m_drive.drive(12,0);
+ }
+ else if(m_drive.getGyro().getAngle() >90 ) {
+ System.out.println(m_drive.getGyro().getAngle());
+  m_drive.drive(0,.5);
+ }
+ else if (m_drive.getencoders()[0].getDistance() < 36){
+  m_drive.drive(12,0);
+ }
+ else if (m_drive.getencoders()[0].getDistance() > 36){
+  m_drive.drive(0,0);
+ }
 
-    else if  (elapsed < 1) {
-      m_drive.drive(1,2);
-    }
+
+
+}
+  
+
+
+
+
+    // if( elapsed < 1.2){
+    //   m_drive.drive(15, 0);
+    // }
+
+    // else if  (elapsed <1.7) {
+    //   m_drive.drive(0,2);
+    // }
+    // else if (elapsed <3){
+    //   m_drive.drive(20, 0);
+    // }
+    // else if (elapsed < 3.35){
+    //   m_drive.drive(0,-3);
+    // }
+    // else if (elapsed < 4.7){
+    //   m_drive.drive(20, 0);
+    // }
+    // else if (elapsed < 5.2){
+    // m_drive.drive(0,-3);
+    // }
+    // else if (elapsed <6){
+    //   m_drive.drive(20, 0);
+    // }
+
+    
+    //   else if (elapsed < 5.5){
+    //     m_drive.drive(20, 0);
+    //   }
+    //   else if (elapsed < 6){
+    //     m_drive.drive(0, -3);
+      
+    //   }
+    //   else if (elapsed < 6.1){
+    //     m_drive.drive(20, 0);
+    //   }
+   
+   
+   
+   
+   
+   
+   
     // else if( elapsed < 3.25){
     //   m_drive.drive(0, 1);
       
@@ -82,11 +168,11 @@ public class Robot extends TimedRobot {
     // else if(elapsed < 7.5){
     //   m_drive.drive(20, 0);
     // }
-    else {
-      m_drive.drive(0,0);
-    }
+    // else {
+    //   m_drive.drive(0,0);
+    
 
-  }
+  
 
   @Override
   @SuppressWarnings("LocalVariableName")

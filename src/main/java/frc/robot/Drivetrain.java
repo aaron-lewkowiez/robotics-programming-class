@@ -50,6 +50,21 @@ public class Drivetrain {
   private final Encoder m_leftEncoder = new Encoder(0, 1);
   private final Encoder m_rightEncoder = new Encoder(2, 3);
 
+  public Encoder[] getencoders() {
+    Encoder[] encoders = new Encoder[2];
+    encoders[0] = m_leftEncoder;
+    encoders[1] = m_rightEncoder; 
+    
+    return encoders;
+  }
+
+  public AnalogGyro getGyro() {
+    return m_gyro;
+  }
+
+
+
+
   private final PIDController m_leftPIDController = new PIDController(8.5, 0, 0);
   private final PIDController m_rightPIDController = new PIDController(8.5, 0, 0);
 
