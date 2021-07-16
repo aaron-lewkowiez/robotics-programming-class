@@ -62,12 +62,21 @@ public class Robot extends TimedRobot {
     double speed;
     double spin;
 
-    if( elapsed < 2.00 ){
-      m_drive.drive(5, 0);
-    }
-    else if( elapsed < 3.25){
-      m_drive.drive(0, 1);
-    }
+    if( elapsed < 1.10 ){
+      m_drive.drive(1, 1);
+    } 
+    else if( elapsed < 6){
+      m_drive.drive(1, 0);
+    } 
+    else if (elapsed < 8.20) {
+      m_drive.drive(1,-1);
+    } 
+    else if (elapsed < 10.0){
+      m_drive.drive(0.5,-0.25);
+    } 
+    else if (elapsed < 12.0){
+      m_drive.drive(1,0.25);
+    } 
     else {
       m_drive.drive(0,0);
     }
