@@ -54,7 +54,6 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_timer.reset();
     m_timer.start();
-    // m_drive.resetOdometry(new Pose2d(3, 3, new Rotation2d(90)));
   }
 
   @Override
@@ -62,27 +61,17 @@ public class Robot extends TimedRobot {
     double elapsed = m_timer.get();
     double speed;
     double spin;
-    if(elapsed < 2.00) {
-      speed = 0.0;
-      spin = 1;
+
+    if( elapsed < 2.00 ){
+      m_drive.drive(5, 0);
     }
-    else if(elapsed < 4.00) {
-      speed = 2;
-      spin = 0;
-    }
-    else if(elapsed < 6.00) {
-      speed = 1;
-      spin = -1.5;
-    }
-    else if(elapsed < 8.00) {
-      speed = 2;
-      spin = 100.50;
+    else if( elapsed < 3.25){
+      m_drive.drive(0, 1);
     }
     else {
-      speed = 0;
-      spin = 0;
+      m_drive.drive(0,0);
     }
-    m_drive.drive(speed, spin);
+
   }
 
   @Override
