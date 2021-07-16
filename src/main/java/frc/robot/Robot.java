@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
@@ -62,18 +63,45 @@ public class Robot extends TimedRobot {
     double speed;
     double spin;
 
-    if( elapsed < 0.50 ){
-      m_drive.drive(0, 4);
+    AnalogGyro gyro = m_drive.getGyro();
+    
+    if (m_drive.getEncoders()[0].getDistance()< 8.50) {
+      m_drive.drive(5,0);
     }
-    else if ( elapsed < 1.50 ){
-      m_drive.drive(5, 0);
+    else if ( gyro.getAngle() > -90 ){
+      m_drive.drive(0,1);
     }
-    else if ( elapsed < 2){
-      m_drive.drive(2, 2);
+    else if (m_drive.getEncoders()[0].getDistance()< 6) {
+      m_drive.drive(5,0);
+    }
+    else if ( gyro.getAngle() > 90 ){
+      m_drive.drive(0,1);
+    }
+    else if (m_drive.getEncoders()[0].getDistance()< 5) {
+      m_drive.drive(5,0);
+    }
+    else if ( gyro.getAngle() > 90 ){
+      m_drive.drive(0,1);
+    }
+    else if (m_drive.getEncoders()[0].getDistance()< 3) {
+      m_drive.drive(5,0);
+    }
+    else if ( gyro.getAngle() > 90 ){
+      m_drive.drive(0,1);
+    }
+    else if (m_drive.getEncoders()[0].getDistance()< 4) {
+      m_drive.drive(5,0);
+    }
+    else if ( gyro.getAngle() > -90 ){
+      m_drive.drive(0,1);
+    }
+    else if (m_drive.getEncoders()[0].getDistance()< 4.5) {
+      m_drive.drive(5,0);
     }
     else {
       m_drive.drive(0,0);
     }
+    
 
   }
 

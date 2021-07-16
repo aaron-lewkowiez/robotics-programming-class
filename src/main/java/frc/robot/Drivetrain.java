@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.crypto.spec.DHGenParameterSpec;
+
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMSparkMax;
@@ -11,7 +13,9 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.estimator.AngleStatistics;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -50,10 +54,21 @@ public class Drivetrain {
   private final Encoder m_leftEncoder = new Encoder(0, 1);
   private final Encoder m_rightEncoder = new Encoder(2, 3);
 
+  public Encoder[] getEncoders(){
+    Encoder[] encoders = new Encoder[2];
+    encoders[0] = m_leftEncoder;
+    encoders[1] = m_rightEncoder;
+    return encoders;
+  }
+  
   private final PIDController m_leftPIDController = new PIDController(8.5, 0, 0);
   private final PIDController m_rightPIDController = new PIDController(8.5, 0, 0);
 
   private final AnalogGyro m_gyro = new AnalogGyro(0);
+
+  public AnalogGyro getGyro(){
+    return m_gyro; 
+  }
 
   private final DifferentialDriveKinematics m_kinematics =
       new DifferentialDriveKinematics(kTrackWidth);
