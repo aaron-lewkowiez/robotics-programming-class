@@ -65,9 +65,23 @@ public class Robot extends TimedRobot {
     if( elapsed < 2.00 ){
       m_drive.drive(5, 0);
     }
-    else if( elapsed < 3.25){
-      m_drive.drive(0, 1);
+
+    else if  (elapsed <3) {
+      m_drive.drive(1,2);
     }
+    // else if( elapsed < 3.25){
+    //   m_drive.drive(0, 1);
+      
+    // }
+    // else if(elapsed < 5) {
+    //   m_drive.drive(0,2);
+    // }
+    // else if(elapsed < 7){
+    //   m_drive.drive(10, 10);
+    // }
+    // else if(elapsed < 7.5){
+    //   m_drive.drive(20, 0);
+    // }
     else {
       m_drive.drive(0,0);
     }
